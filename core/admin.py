@@ -11,6 +11,7 @@ def add_10_points(modeladmin, request, queryset):
         obj.event_points += 10
         obj.save()
 
+
 def add_20_points(modeladmin, request, queryset):
     for obj in queryset:
         player = obj.player
@@ -19,21 +20,25 @@ def add_20_points(modeladmin, request, queryset):
         obj.event_points += 20
         obj.save()
 
+
 class EventAdmin(admin.ModelAdmin):
     search_fields = ('name', )
 
+
 class PlayerAdmin(admin.ModelAdmin):
     search_fields = ['username', 'phone']
-    list_display = ['username', 'phone', 'points']
+    list_display = ['username', 'phone', 'email', 'points']
     readonly_fields = ('points',)
 
+
 class EventPlayerAdmin(admin.ModelAdmin):
-    list_display = ['player','event','event_points']
+    list_display = ['player', 'event', 'event_points']
     search_fields = ('event__name', 'player__username')
-    autocomplete_fields = ('event', 'player' )
+    autocomplete_fields = ('event', 'player')
     readonly_fields = ('event_points',)
     list_filter = ('event__name',)
-    actions = [add_10_points, add_20_points] 
+    actions = [add_10_points, add_20_points]
+
 
 admin.site.site_header = 'Inertia Admin'
 admin.site.register(Player, PlayerAdmin)
