@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^kv#b7l)*o!tqwkw3t^k$v=0zo3x2ev5jy74owi42w%ckm6cxr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["inertia-api.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -80,9 +80,17 @@ WSGI_APPLICATION = 'inertia.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd2m5v76kuqu2o3',
+        'HOST': 'ec2-3-230-122-20.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'ldscqstocspldn',
+        'PASSWORD': '89b0bd3dd401b986aa81b8083be30bbde72bc49775ce7c2275f8792c9f2e3a78'
     }
 }
 
