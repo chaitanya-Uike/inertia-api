@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^kv#b7l)*o!tqwkw3t^k$v=0zo3x2ev5jy74owi42w%ckm6cxr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["inertia-api.herokuapp.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["inertia-api-v2.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
