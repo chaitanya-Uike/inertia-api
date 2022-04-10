@@ -1,5 +1,4 @@
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -7,7 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 class Player(models.Model):
     username = models.CharField(max_length=255, unique=True)
     phone = models.CharField(max_length=10, unique=True)
-    email = models.CharField(max_length=255, unique=True, default="")
+    email = models.EmailField(unique=True, default="")
     points = models.PositiveIntegerField(default=0)
 
     def __str__(self):
