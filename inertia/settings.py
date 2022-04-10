@@ -85,17 +85,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'ded6gaa48dphae',
-    #     'HOST': 'ec2-18-214-134-226.compute-1.amazonaws.com',
-    #     'PORT': 5432,
-    #     'USER': 'vuxbsyjusqpfwo',
-    #     'PASSWORD': '455ffa173eee54a81d5e54c2b7b5de80437d993c284e713e22de6e7fc795db82'
-    # }
 }
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(ssl_require=True)
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config(ssl_require=True)
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 

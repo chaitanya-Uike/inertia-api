@@ -10,7 +10,8 @@ def leaderboard(request):
     for player in players:
         ctx["players"].append({
             "username": player.username,
-            "points": player.points
+            "points": player.points,
+            "rank": player.rank
         })
     return JsonResponse(ctx)
 
@@ -60,7 +61,8 @@ def player_search(request):
         for player in players:
             ctx["players"].append({
                 "username": player.username,
-                "points": player.points
+                "points": player.points,
+                "rank": player.rank
             })
         return JsonResponse(ctx)
 
@@ -92,7 +94,8 @@ def player_registration(request):
                 "status": "FAILED"
             })
 
-        player = Player(username=username, phone=phone, email=email)
+        last_player_rank = Player.objects.last().rank
+        player = Player(username=username, phone=phone, email=email, rank=last_player_rank+1)
         player.save()
 
         return JsonResponse({

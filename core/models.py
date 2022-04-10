@@ -8,6 +8,7 @@ class Player(models.Model):
     phone = models.CharField(max_length=10, unique=True)
     email = models.EmailField(unique=True, default="")
     points = models.PositiveIntegerField(default=0)
+    rank = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.username
