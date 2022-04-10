@@ -15,17 +15,22 @@ def add_10_points(modeladmin, request, queryset):
             player.rank = 1
 
         to_rank = player.rank
+        print("For", player, ":")
         print(f"{player} went from {from_rank} to {to_rank}")
         
-        for p in Player.objects.filter(rank__gte=to_rank, rank__lt=from_rank):
-            print(f"{p} reduced rank from {p.rank}")
-            p.rank += 1
-            p.save()
-            print(f"{p} reduced rank to {p.rank}")
+        if from_rank != to_rank:
+            for p in Player.objects.filter(rank__gte=to_rank, rank__lt=from_rank):
+                print(f"{p} reduced rank from {p.rank}")
+                p.rank += 1
+                p.save()
+                print(f"{p} reduced rank to {p.rank}")
 
         player.save()
+
         obj.event_points += 10
         obj.save()
+        print("----")
+
 
 
 def add_20_points(modeladmin, request, queryset):
@@ -41,16 +46,19 @@ def add_20_points(modeladmin, request, queryset):
             player.rank = 1
 
         to_rank = player.rank
-        
+        print("For", player, ":")
         print(f"{player} went from {from_rank} to {to_rank}")
-        for p in Player.objects.filter(rank__gte=to_rank, rank__lt=from_rank):
-            print(f"{p} reduced rank from {p.rank}")
-            p.rank += 1
-            p.save()
-            print(f"{p} reduced rank to {p.rank}")
+        print("Shifting down:", Player.objects.filter(rank__gte=to_rank, rank__lt=from_rank))
+        if from_rank != to_rank:
+            for p in Player.objects.filter(rank__gte=to_rank, rank__lt=from_rank):
+                print(f"{p} reduced rank from {p.rank}")
+                p.rank += 1
+                p.save()
+                print(f"{p} reduced rank to {p.rank}")
         player.save()
         obj.event_points += 20
         obj.save()
+        print("----")
 
 
 class EventAdmin(admin.ModelAdmin):
