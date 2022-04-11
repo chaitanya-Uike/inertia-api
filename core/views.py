@@ -26,36 +26,8 @@ def events_list(request):
     return JsonResponse(ctx)
 
 
-# def event_leaderboard(request, event_name):
-#     ctx = {
-#         "players": []
-#     }
-#     players = EventPlayer.objects.filter(
-#         event__name=event_name).order_by('-event_points', 'registration_date')
-#     for player in players:
-#         ctx["players"].append({
-#             "username": player.player.username,
-#             "points": player.event_points
-#         })
-#     return JsonResponse(ctx)
-
-
 def player_search(request):
-    # event = request.GET.get('event')
     name = request.GET.get('name')
-
-    # if event != "All":
-    #     event_players = EventPlayer.objects.filter(
-    #         event__name=event, player__username__icontains=name)
-    #     ctx = {"players": []}
-
-    #     for player in event_players:
-    #         ctx["players"].append({
-    #             "username": player.player.username,
-    #             "points": player.event_points
-    #         })
-    #     return JsonResponse(ctx)
-    # else:
     players = Player.objects.filter(username__icontains=name)[:20]
     ctx = {"players": []}
     for player in players:
