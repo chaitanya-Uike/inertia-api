@@ -9,6 +9,7 @@ class Player(models.Model):
     email = models.EmailField(unique=True, default="")
     points = models.PositiveIntegerField(default=0)
     rank = models.PositiveIntegerField(default=0)
+    registration_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.username
@@ -25,6 +26,7 @@ class EventPlayer(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     event_points = models.PositiveIntegerField(default=0)
+    registration_date = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return str(self.event) + " - " + str(self.player.username)
