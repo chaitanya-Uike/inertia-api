@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def leaderboard(request):
-    players = Player.objects.all().order_by('-points', 'registration_date')[:21]
+    players = Player.objects.all().order_by('-points', 'registration_date')[:20]
     ctx = {"players": []}
     for player in players:
         ctx["players"].append({
@@ -56,7 +56,7 @@ def player_search(request):
     #         })
     #     return JsonResponse(ctx)
     # else:
-    players = Player.objects.filter(username__icontains=name)
+    players = Player.objects.filter(username__icontains=name)[:20]
     ctx = {"players": []}
     for player in players:
         ctx["players"].append({
