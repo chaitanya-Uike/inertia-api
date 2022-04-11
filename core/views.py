@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def leaderboard(request):
-    players = Player.objects.all().order_by('-points', 'registration_date')
+    players = Player.objects.all().order_by('-points', 'registration_date')[:21]
     ctx = {"players": []}
     for player in players:
         ctx["players"].append({
@@ -26,45 +26,45 @@ def events_list(request):
     return JsonResponse(ctx)
 
 
-def event_leaderboard(request, event_name):
-    ctx = {
-        "players": []
-    }
-    players = EventPlayer.objects.filter(
-        event__name=event_name).order_by('-event_points', 'registration_date')
-    for player in players:
-        ctx["players"].append({
-            "username": player.player.username,
-            "points": player.event_points
-        })
-    return JsonResponse(ctx)
+# def event_leaderboard(request, event_name):
+#     ctx = {
+#         "players": []
+#     }
+#     players = EventPlayer.objects.filter(
+#         event__name=event_name).order_by('-event_points', 'registration_date')
+#     for player in players:
+#         ctx["players"].append({
+#             "username": player.player.username,
+#             "points": player.event_points
+#         })
+#     return JsonResponse(ctx)
 
 
 def player_search(request):
-    event = request.GET.get('event')
+    # event = request.GET.get('event')
     name = request.GET.get('name')
 
-    if event != "All":
-        event_players = EventPlayer.objects.filter(
-            event__name=event, player__username__icontains=name)
-        ctx = {"players": []}
+    # if event != "All":
+    #     event_players = EventPlayer.objects.filter(
+    #         event__name=event, player__username__icontains=name)
+    #     ctx = {"players": []}
 
-        for player in event_players:
-            ctx["players"].append({
-                "username": player.player.username,
-                "points": player.event_points
-            })
-        return JsonResponse(ctx)
-    else:
-        players = Player.objects.filter(username__icontains=name)
-        ctx = {"players": []}
-        for player in players:
-            ctx["players"].append({
-                "username": player.username,
-                "points": player.points,
-                "rank": player.rank
-            })
-        return JsonResponse(ctx)
+    #     for player in event_players:
+    #         ctx["players"].append({
+    #             "username": player.player.username,
+    #             "points": player.event_points
+    #         })
+    #     return JsonResponse(ctx)
+    # else:
+    players = Player.objects.filter(username__icontains=name)
+    ctx = {"players": []}
+    for player in players:
+        ctx["players"].append({
+            "username": player.username,
+            "points": player.points,
+            "rank": player.rank
+        })
+    return JsonResponse(ctx)
 
 
 @csrf_exempt
